@@ -1,78 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>LendingClub Default Risk Demo</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LendingClub Default Risk Predictor</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-  <div class="container">
-    <header>
-      <h1>LendingClub Default Risk Predictor</h1>
-      <p>Enter a few key loan and borrower details to estimate default risk.</p>
-    </header>
+    <div class="container">
+        <h1>LendingClub Default Risk Predictor</h1>
+        <p>Enter a few key loan and borrower details to estimate default risk.</p>
 
-    <main>
-      <form id="prediction-form">
-        <div class="form-row">
-          <label for="loan_amnt">Loan Amount ($)</label>
-          <input type="number" id="loan_amnt" name="loan_amnt" required min="500" step="100" />
+        <!-- ================= FORM ================= -->
+        <form id="prediction-form">
+
+            <label>Loan Amount ($)</label>
+            <input id="loan_amnt" type="number" placeholder="e.g., 12000" required />
+
+            <label>Interest Rate (%)</label>
+            <input id="int_rate" type="number" step="0.01" placeholder="e.g., 14.7" required />
+
+            <label>Annual Income ($)</label>
+            <input id="annual_inc" type="number" placeholder="e.g., 65000" required />
+
+            <label>Debt-to-Income Ratio (%)</label>
+            <input id="dti" type="number" step="0.01" placeholder="e.g., 18.4" required />
+
+            <label>FICO Range Low</label>
+            <input id="fico_low" type="number" placeholder="e.g., 680" required />
+
+            <label>FICO Range High</label>
+            <input id="fico_high" type="number" placeholder="e.g., 700" required />
+
+            <label>Loan Term</label>
+            <select id="term">
+                <option value="36">36 months</option>
+                <option value="60">60 months</option>
+            </select>
+
+            <button type="submit" class="predict-btn">Predict Default Risk</button>
+        </form>
+
+        <!-- ============= ERROR CARD ============= -->
+        <div id="error-card" class="card error hidden">
+            <h3>Oops</h3>
+            <p id="error-message">Load failed</p>
         </div>
 
-        <div class="form-row">
-          <label for="int_rate">Interest Rate (%)</label>
-          <input type="number" id="int_rate" name="int_rate" required step="0.01" />
+        <!-- ============= RESULT CARD ============= -->
+        <div id="result-card" class="card result hidden">
+            <h3 id="result-label"></h3>
+            <p id="result-prob"></p>
+            <p id="result-note"></p>
         </div>
 
-        <div class="form-row">
-          <label for="annual_inc">Annual Income ($)</label>
-          <input type="number" id="annual_inc" name="annual_inc" required step="1000" />
-        </div>
+        <footer>
+            Mini Project 5 — LendingClub Default Prediction | Built by Rishi
+        </footer>
+    </div>
 
-        <div class="form-row">
-          <label for="dti">Debt-to-Income Ratio (%)</label>
-          <input type="number" id="dti" name="dti" required step="0.1" />
-        </div>
-
-        <div class="form-row">
-          <label for="fico_low">FICO Range Low</label>
-          <input type="number" id="fico_low" name="fico_low" required min="300" max="900" />
-        </div>
-
-        <div class="form-row">
-          <label for="fico_high">FICO Range High</label>
-          <input type="number" id="fico_high" name="fico_high" required min="300" max="900" />
-        </div>
-
-        <div class="form-row">
-          <label for="term">Loan Term</label>
-          <select id="term" name="term">
-            <option value="36">36 months</option>
-            <option value="60">60 months</option>
-          </select>
-        </div>
-
-        <button type="submit">Predict Default Risk</button>
-      </form>
-
-      <section id="result-card" class="hidden">
-        <h2>Prediction Result</h2>
-        <p id="result-label"></p>
-        <p id="result-prob"></p>
-        <p id="result-note"></p>
-      </section>
-
-      <section id="error-card" class="hidden error">
-        <h2>Oops</h2>
-        <p id="error-message"></p>
-      </section>
-    </main>
-
-    <footer>
-      <p>Mini Project 5 &mdash; LendingClub Default Prediction | Built by Rishi</p>
-    </footer>
-  </div>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
+
