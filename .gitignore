@@ -205,3 +205,10 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+LCDataDictionary (1).xlsx
+LoanStats3a_securev1.csv
+LoanStats3b_securev1.csv
+LoanStats3c_securev1.csv
+LoanStats3d_securev1.csv
+web_pipeline_lr.pkl
+xgb_web_pipeline.pkl
