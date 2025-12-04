@@ -3,7 +3,11 @@ import joblib
 import pandas as pd
 import os
 
+from flask_cors import CORS  # NEW
+
 app = Flask(__name__)
+# Allow requests from any origin (for class project this is fine)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 # Path to the logistic regression web pipeline
 MODEL_PATH = os.path.join(os.path.dirname(__file__), "web_pipeline_lr.pkl")
@@ -21,6 +25,7 @@ DEPLOY_FEATURES = [
 
 pipeline = None
 
+
 def load_model():
     """Lazy-load the model to avoid heavy work at import time."""
     global pipeline
@@ -34,8 +39,14 @@ def home():
     return "LendingClub default risk API is running."
 
 
-@app.route("/predict", methods=["POST"])
+@app.route("/predict", methods=["POST", "OPTIONS"])
 def predict():
+    # Handle CORS preflight request
+    if request.method == "OPTIONS":
+        # Browser is just checking what’s allowed
+        response = jsonify({"status": "ok"})
+        return response, 200
+
     try:
         data = request.get_json(force=True)
 
@@ -67,9 +78,9 @@ def predict():
         )
 
     except Exception as e:
-        # Helpful error in logs + safe JSON message
         return jsonify({"error": str(e)}), 500
 
 
 if __name__ == "__main__":
     app.run(debug=True)
+
